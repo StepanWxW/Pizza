@@ -1,13 +1,13 @@
-package com.stepan.pizza.ui.basket
+package com.stepan.pizza.presentation.ui.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class BasketViewModel : ViewModel() {
+class ProfileViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is basket Fragment"
+        value = "This is profile Fragment"
     }
     val text: LiveData<String> = _text
 }

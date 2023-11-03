@@ -1,4 +1,4 @@
-package com.stepan.pizza.ui.profile
+package com.stepan.pizza.presentation.ui.basket
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.stepan.pizza.databinding.FragmentProfileBinding
+import com.stepan.pizza.databinding.FragmentBasketBinding
 
-class ProfileFragment : Fragment() {
+class BasketFragment : Fragment() {
 
-    private var _binding: FragmentProfileBinding? = null
+    private var _binding: FragmentBasketBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val profileViewModel =
-            ViewModelProvider(this).get(ProfileViewModel::class.java)
+        val basketViewModel =
+            ViewModelProvider(this).get(BasketViewModel::class.java)
 
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        _binding = FragmentBasketBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textProfile
-        profileViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textBasket
+        basketViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.stepan.pizza.ui.home.HomeFragment"
+        android:name="com.stepan.pizza.presentation.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.stepan.pizza.ui.profile.ProfileFragment"
+        android:name="com.stepan.pizza.presentation.ui.profile.ProfileFragment"
         android:label="fragment_basket"
         tools:layout="@layout/fragment_basket" />
     <fragment
         android:id="@+id/navigation_basket"
-        android:name="com.stepan.pizza.ui.basket.BasketFragment"
+        android:name="com.stepan.pizza.presentation.ui.basket.BasketFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 
