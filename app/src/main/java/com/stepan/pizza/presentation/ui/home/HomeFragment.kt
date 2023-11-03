@@ -4,11 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.stepan.pizza.R
 import com.stepan.pizza.databinding.FragmentHomeBinding
 import com.stepan.pizza.presentation.adapter.PromotionAdapter
-import com.stepan.pizza.presentation.model.PromotionModel
+import com.stepan.pizza.presentation.adapter.TitleUIAdapter
+import com.stepan.pizza.presentation.model.PromotionUI
+import com.stepan.pizza.presentation.model.TitleUI
+
 
 class HomeFragment : Fragment() {
 
@@ -38,18 +45,42 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        val toolbar = activity?.findViewById<Toolbar>(R.id.my_toolbar)
+//        val yourData: List<String> = listOf("Москва", "Санкт-Петербург", "Новосибирск")
+//        toolbar?.let {
+//            val spinner = it.findViewById<Spinner>(R.id.spinnerCity)
+//            spinner?.let {
+//                val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, yourData)
+//                it.adapter = adapter
+//            }
+//        }
+
         val promotionList = hardCodeAddPromotion()
-        val adapter = PromotionAdapter(promotionList)
-        binding.recyclerViewPromotion.adapter = adapter
+        val adapterPromotion = PromotionAdapter(promotionList)
+        binding.recyclerViewPromotion.adapter = adapterPromotion
+
+        val titleList = hardCodeAddTitleUI()
+        val adapterTitle = TitleUIAdapter(titleList)
+        binding.recyclerViewTitle.adapter = adapterTitle
     }
 
-    private fun hardCodeAddPromotion(): List<PromotionModel> {
+    private fun hardCodeAddPromotion(): List<PromotionUI> {
         return listOf(
-            PromotionModel("https://pizzayoli.ru/image/cache/catalog/stocks/one_one-1000x0.jpg"),
-            PromotionModel("https://cdpiz1.pizzasoft.ru/pizzafab/content/2/2377/image_5cc2ffaf27693.jpg"),
-            PromotionModel("https://www.givetwo.ru/images/slider/15.jpg"),
-            PromotionModel("https://www.givetwo.ru/images/slider/12.jpg"),
-            PromotionModel("https://www.givetwo.ru/images/slider/14.jpg")
+            PromotionUI("https://pizzayoli.ru/image/cache/catalog/stocks/one_one-1000x0.jpg"),
+            PromotionUI("https://cdpiz1.pizzasoft.ru/pizzafab/content/2/2377/image_5cc2ffaf27693.jpg"),
+            PromotionUI("https://www.givetwo.ru/images/slider/15.jpg"),
+            PromotionUI("https://www.givetwo.ru/images/slider/12.jpg"),
+            PromotionUI("https://www.givetwo.ru/images/slider/14.jpg")
+        )
+    }
+
+    private fun hardCodeAddTitleUI(): List<TitleUI> {
+        return listOf(
+            TitleUI("Пицца", true),
+            TitleUI("Комбо", false),
+            TitleUI("Десерты", false),
+            TitleUI("Напитки", false)
         )
     }
 

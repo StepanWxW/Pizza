@@ -1,6 +1,9 @@
 package com.stepan.pizza
 
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import androidx.appcompat.widget.Toolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -20,5 +23,16 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
         navView.setupWithNavController(navController)
+
+        val yourData: List<String> = listOf("Москва", "Томск", "Минск")
+        val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
+
+        toolbar?.let {
+            val spinner = it.findViewById<Spinner>(R.id.spinnerCity)
+            spinner?.let {
+                val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, yourData)
+                it.adapter = adapter
+            }
+        }
     }
 }
