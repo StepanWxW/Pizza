@@ -40,4 +40,4 @@
 - Retrofit
 
 
-[![Видео работы приложения]](https://www.youtube.com/shorts/qfEOBJRoLFY)
+[![Видео работы приложения]](https://youtube.com/shorts/dYxGjI0xa84?si=0lI8F4n7jGV5u64I)
