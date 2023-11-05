@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import androidx.appcompat.widget.Toolbar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.stepan.pizza.R
 import com.stepan.pizza.databinding.FragmentHomeBinding
+import com.stepan.pizza.presentation.adapter.PizzaAdapter
 import com.stepan.pizza.presentation.adapter.PromotionAdapter
 import com.stepan.pizza.presentation.adapter.TitleUIAdapter
 import com.stepan.pizza.presentation.model.PromotionUI
@@ -20,9 +18,7 @@ import com.stepan.pizza.presentation.model.TitleUI
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private lateinit var viewModel: HomeViewModel
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -30,31 +26,14 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this)[HomeViewModel::class.java]
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-//
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
-        return root
+        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        val toolbar = activity?.findViewById<Toolbar>(R.id.my_toolbar)
-//        val yourData: List<String> = listOf("Москва", "Санкт-Петербург", "Новосибирск")
-//        toolbar?.let {
-//            val spinner = it.findViewById<Spinner>(R.id.spinnerCity)
-//            spinner?.let {
-//                val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, yourData)
-//                it.adapter = adapter
-//            }
-//        }
 
         val promotionList = hardCodeAddPromotion()
         val adapterPromotion = PromotionAdapter(promotionList)
@@ -63,6 +42,23 @@ class HomeFragment : Fragment() {
         val titleList = hardCodeAddTitleUI()
         val adapterTitle = TitleUIAdapter(titleList)
         binding.recyclerViewTitle.adapter = adapterTitle
+
+        pizzasObserve()
+        exceptionObserve()
+    }
+
+    private fun pizzasObserve() {
+        viewModel.pizzas.observe(viewLifecycleOwner) {
+            binding.recyclerViewPizza.adapter = PizzaAdapter(it)
+        }
+    }
+
+    private fun exceptionObserve() {
+        viewModel.errorLiveData.observe(viewLifecycleOwner) { errorMessage ->
+            errorMessage?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun hardCodeAddPromotion(): List<PromotionUI> {

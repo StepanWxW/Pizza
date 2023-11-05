@@ -24,6 +24,10 @@ class MainActivity : AppCompatActivity() {
 
         navView.setupWithNavController(navController)
 
+        hardCodeNavBar()
+    }
+
+    private fun hardCodeNavBar() {
         val yourData: List<String> = listOf("Москва", "Томск", "Минск")
         val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
 
