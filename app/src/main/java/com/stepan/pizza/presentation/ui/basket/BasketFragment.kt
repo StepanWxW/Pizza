@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
+
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.stepan.pizza.R
 import com.stepan.pizza.databinding.FragmentBasketBinding
 
 class BasketFragment : Fragment() {
@@ -32,6 +35,8 @@ class BasketFragment : Fragment() {
         basketViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+        val toolbar = requireActivity().findViewById<Toolbar>(R.id.my_toolbar)
+        toolbar.visibility = View.GONE
         return root
     }
 

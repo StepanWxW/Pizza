@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.stepan.pizza.R
 import com.stepan.pizza.databinding.FragmentHomeBinding
 import com.stepan.pizza.presentation.adapter.PizzaAdapter
 import com.stepan.pizza.presentation.adapter.PromotionAdapter
@@ -45,11 +47,15 @@ class HomeFragment : Fragment() {
 
         pizzasObserve()
         exceptionObserve()
+
+        val toolbar = requireActivity().findViewById<Toolbar>(R.id.my_toolbar)
+        toolbar?.visibility = View.VISIBLE
     }
 
     private fun pizzasObserve() {
         viewModel.pizzas.observe(viewLifecycleOwner) {
             binding.recyclerViewPizza.adapter = PizzaAdapter(it)
+            binding.loadingLayout.visibility = View.GONE
         }
     }
 
